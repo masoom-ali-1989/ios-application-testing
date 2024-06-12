@@ -24,12 +24,9 @@ steps:
       actions: 'build'
       configuration: '$(buildConfiguration)'
       sdk: 'iphoneos'
-      xcWorkspacePath: '$(Build.SourcesDirectory)/testing_demo.xcworkspace'
+      xcWorkspacePath: 
       scheme: 'testing_demo'
-      packageApp: true
-      exportPath: '$(Build.ArtifactStagingDirectory)'
-      exportOptionsPlist: '$(Build.SourcesDirectory)/ExportOptions.plist'
-      signingStyle: 'manual'  # Set signing style to manual
+      packageApp: false
       args: 'CODE_SIGNING_ALLOWED=NO'
 
   - task: CopyFiles@2
