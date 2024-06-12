@@ -26,8 +26,9 @@ steps:
       sdk: 'iphoneos'
       scheme: 'testing_demo'
       packageApp: false
+      xcWorkspacePath: '$(Build.SourcesDirectory)/testing_demo.xcodeproj/project.xcworkspace'
       destinationPlatformOption: 'iOS Simulator'
-      destinationSimulators: 'iPhone 13'
+      destinationSimulators: 'iPhone 13 (16.2)'
 
   - task: CopyFiles@2
     inputs:
