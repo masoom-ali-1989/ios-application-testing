@@ -27,7 +27,9 @@ steps:
       xcWorkspacePath: '$(Build.SourcesDirectory)/testing_demo.xcworkspace'
       scheme: 'testing_demo'
       packageApp: true
-      exportPath: 
+      exportPath: '$(Build.ArtifactStagingDirectory)'
+      exportOptionsPlist: '$(Build.SourcesDirectory)/ExportOptions.plist'
+      signingStyle: 'manual'  # Set signing style to manual
       args: 'CODE_SIGNING_ALLOWED=NO'
 
   - task: CopyFiles@2
