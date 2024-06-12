@@ -15,7 +15,7 @@ steps:
   - script: sudo gem install cocoapods
     displayName: 'Install CocoaPods'
 
-  - script: pod install
+  - script: pod install --repo-update
     displayName: 'Install CocoaPods Dependencies'
     workingDirectory: '$(Build.SourcesDirectory)'
 
@@ -24,9 +24,11 @@ steps:
       actions: 'build'
       configuration: '$(buildConfiguration)'
       sdk: 'iphoneos'
-      xcWorkspacePath: '$(Build.SourcesDirectory)/testing_demo.xcodeproj/project.xcworkspace'
       scheme: 'testing_demo'
       packageApp: false
+      xcWorkspacePath: '$(Build.SourcesDirectory)/testing_demo.xcodeproj/project.xcworkspace'
+      destinationPlatformOption: 'iOS Simulator'
+      destinationSimulators: 'iPhone 13'
 
   - task: CopyFiles@2
     inputs:
