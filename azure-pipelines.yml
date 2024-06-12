@@ -21,21 +21,25 @@ steps:
 
   - task: Xcode@5
     inputs:
-      actions: 'build'
+      actions: 'clean archive'
       configuration: '$(buildConfiguration)'
       sdk: 'iphoneos'
       scheme: 'testing_demo'
-      packageApp: false
+      packageApp: true
       xcWorkspacePath: '$(Build.SourcesDirectory)/testing_demo.xcworkspace'
+      archivePath: '$(build.artifactStagingDirectory)/testing_demo.xcarchive'
+      exportPath: '$(build.artifactStagingDirectory)/output'
+      exportOptions: 'plist'
+      exportOptionsPlist: '$(Build.SourcesDirectory)/ExportOptions.plist'
       args: 'CODE_SIGNING_ALLOWED=NO'
 
   - task: CopyFiles@2
     inputs:
-      Contents: '**/*.ipa'
-      TargetFolder: '$(build.artifactStagingDirectory)'
+      contents: '$(build.artifactStagingDirectory)/output/*.ipa'
+      targetFolder: '$(build.artifactStagingDirectory)'
 
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      PathtoPublish: '$(build.artifactStagingDirectory)'
       ArtifactName: 'drop'
       publishLocation: 'Container'
