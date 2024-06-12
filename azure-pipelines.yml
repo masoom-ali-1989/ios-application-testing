@@ -26,6 +26,8 @@ steps:
       sdk: 'iphoneos'
       scheme: 'testing_demo'
       packageApp: false
+      destinationPlatformOption: 'iOS Simulator'
+      destinationSimulators: 'iPhone 13'
 
   - task: CopyFiles@2
     inputs:
