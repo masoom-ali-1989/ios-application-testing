@@ -27,8 +27,7 @@ steps:
       scheme: 'testing_demo'
       packageApp: false
       xcWorkspacePath: '$(Build.SourcesDirectory)/testing_demo.xcodeproj/project.xcworkspace'
-      destinationPlatformOption: 'iOS Simulator'
-      destinationSimulators: 'iPhone 13'
+      args: 'CODE_SIGNING_ALLOWED=NO'
 
   - task: CopyFiles@2
     inputs:
