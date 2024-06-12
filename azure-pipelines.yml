@@ -27,6 +27,7 @@ steps:
       xcWorkspacePath: '$(Build.SourcesDirectory)/testing_demo.xcworkspace'
       scheme: 'testing_demo'
       packageApp: true
+      exportPath: 
       args: 'CODE_SIGNING_ALLOWED=NO'
 
   - task: CopyFiles@2
