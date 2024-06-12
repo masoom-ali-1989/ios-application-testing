@@ -24,7 +24,7 @@ steps:
       actions: 'build'
       configuration: '$(buildConfiguration)'
       sdk: 'iphoneos'
-      scheme: 'FoodieApp'
+      scheme: 'testing_demo'
       packageApp: false
 
   - task: CopyFiles@2
