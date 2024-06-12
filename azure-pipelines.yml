@@ -6,6 +6,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  teamID: 'YOUR_TEAM_ID'  # Replace with your actual Apple Developer Team ID
 
 steps:
   - task: UseRubyVersion@0
@@ -27,7 +28,7 @@ steps:
           <key>method</key>
           <string>app-store</string>
           <key>teamID</key>
-          <string>YOUR_TEAM_ID</string>
+          <string>$(teamID)</string>
           <key>uploadBitcode</key>
           <false/>
           <key>compileBitcode</key>
