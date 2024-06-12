@@ -24,9 +24,9 @@ steps:
       actions: 'build'
       configuration: '$(buildConfiguration)'
       sdk: 'iphoneos'
-      xcWorkspacePath: 
       scheme: 'testing_demo'
       packageApp: false
+      xcWorkspacePath: '$(Build.SourcesDirectory)/testing_demo.xcworkspace'
       args: 'CODE_SIGNING_ALLOWED=NO'
 
   - task: CopyFiles@2
