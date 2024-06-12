@@ -6,7 +6,6 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  teamID: 'YOUR_TEAM_ID'  # Replace with your actual Apple Developer Team ID
 
 steps:
   - task: UseRubyVersion@0
@@ -20,50 +19,23 @@ steps:
     displayName: 'Install CocoaPods Dependencies'
     workingDirectory: '$(Build.SourcesDirectory)'
 
-  - script: |
-      cat <<EOF > $(Build.SourcesDirectory)/ExportOptions.plist
-      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-      <plist version="1.0">
-      <dict>
-          <key>method</key>
-          <string>app-store</string>
-          <key>teamID</key>
-          <string>$(teamID)</string>
-          <key>uploadBitcode</key>
-          <false/>
-          <key>compileBitcode</key>
-          <true/>
-          <key>signingStyle</key>
-          <string>automatic</string>
-          <key>stripSwiftSymbols</key>
-          <true/>
-          <key>thinning</key>
-          <string>&lt;none&gt;</string>
-      </dict>
-      </plist>
-      EOF
-    displayName: 'Create ExportOptions.plist'
-
   - task: Xcode@5
     inputs:
-      actions: 'clean archive'
+      actions: 'build'
       configuration: '$(buildConfiguration)'
       sdk: 'iphoneos'
       scheme: 'testing_demo'
-      packageApp: true
+      packageApp: false
       xcWorkspacePath: '$(Build.SourcesDirectory)/testing_demo.xcworkspace'
-      archivePath: '$(build.artifactStagingDirectory)/testing_demo.xcarchive'
-      exportPath: '$(build.artifactStagingDirectory)/output'
-      exportOptionsPlist: '$(Build.SourcesDirectory)/ExportOptions.plist'
       args: 'CODE_SIGNING_ALLOWED=NO'
 
   - task: CopyFiles@2
     inputs:
-      contents: '$(build.artifactStagingDirectory)/output/*.ipa'
-      targetFolder: '$(build.artifactStagingDirectory)'
+      Contents: '**/*.ipa'
+      TargetFolder: '$(build.artifactStagingDirectory)'
 
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: '$(build.artifactStagingDirectory)'
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'drop'
       publishLocation: 'Container'
